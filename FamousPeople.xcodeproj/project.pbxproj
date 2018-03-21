@@ -12,6 +12,7 @@
 		22749E981FD5F07E009B1F2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22749E921FD5F07E009B1F2D /* Main.storyboard */; };
 		22749E991FD5F07E009B1F2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22749E941FD5F07E009B1F2D /* AppDelegate.swift */; };
 		229822632035CC5200873A30 /* FamousPeopleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 229822622035CC5200873A30 /* FamousPeopleViewController.swift */; };
+		2C5657F820619E5600896985 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C5657F720619E5600896985 /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		22749E941FD5F07E009B1F2D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22749E951FD5F07E009B1F2D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		229822622035CC5200873A30 /* FamousPeopleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamousPeopleViewController.swift; sourceTree = "<group>"; };
+		2C5657F720619E5600896985 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		D2A5F2001F4A9144005CD714 /* FamousPeople.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FamousPeople.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -40,6 +42,7 @@
 			children = (
 				22749E941FD5F07E009B1F2D /* AppDelegate.swift */,
 				229822622035CC5200873A30 /* FamousPeopleViewController.swift */,
+				2C5657F720619E5600896985 /* DatabaseManager.swift */,
 				22749E901FD5F07E009B1F2D /* LaunchScreen.xib */,
 				22749E911FD5F07E009B1F2D /* Assets.xcassets */,
 				22749E921FD5F07E009B1F2D /* Main.storyboard */,
@@ -140,6 +143,7 @@
 			files = (
 				229822632035CC5200873A30 /* FamousPeopleViewController.swift in Sources */,
 				22749E991FD5F07E009B1F2D /* AppDelegate.swift in Sources */,
+				2C5657F820619E5600896985 /* DatabaseManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

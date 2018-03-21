@@ -22,24 +22,44 @@ class FamousPeopleViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var searchBar: UISearchBar!
+  let dbManager = DatabaseManager()
+  var searchResults : [[String: String]] = []
+  var results : [[String: String]] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
+//    let dbManager = DatabaseManager()
+    dbManager.openDatabase()
+//    dbManager.getAllPeople()
+    tableView.reloadData()
   }
   
   func searchForPeople(withName name: String) {
-    print("search for people with name: \(name)")
+    searchResults = dbManager.getAllPeople(withNameLike: name)!
   }
 }
 
 extension FamousPeopleViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 0
+    
+    if searchResults.count != 0 {
+      results = searchResults
+    } else {
+      results = dbManager.getAllPeople()!
+    }
+    return (results.count)
   }
+
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return UITableViewCell()
+    
+    let tableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    
+    let firstNameString = results[indexPath.row]["first_name"]
+    let lastNameString = results[indexPath.row]["last_name"]
+    tableViewCell.textLabel?.text = firstNameString! + " " + lastNameString!
+    return tableViewCell
   }
 }
 
@@ -49,6 +69,17 @@ extension FamousPeopleViewController: UISearchBarDelegate {
     guard let name = searchBar.text else {
       return
     }
-    searchForPeople(withName: name)
+    if name != "" {
+      searchForPeople(withName: name)
+      tableView.reloadData()
+
+    }
   }
+  func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+//    searchBar.resignFirstResponder()
+    if searchBar.text == "" {
+      searchForPeople(withName: "")
+      tableView.reloadData()
+      
+    }  }
 }
