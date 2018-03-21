@@ -46,7 +46,7 @@ extension FamousPeopleViewController: UITableViewDelegate, UITableViewDataSource
     if searchResults.count != 0 {
       results = searchResults
     } else {
-      results = dbManager.getAllPeople()!
+      results = dbManager.getAllPeople(withNameLike: "")!
     }
     return (results.count)
   }
@@ -81,5 +81,7 @@ extension FamousPeopleViewController: UISearchBarDelegate {
       searchForPeople(withName: "")
       tableView.reloadData()
       
-    }  }
+    }
+    
+  }
 }

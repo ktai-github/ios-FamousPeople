@@ -68,63 +68,28 @@ class DatabaseManager: NSObject {
     closeDatabase()
   }
   
-  func getAllPeople() -> [[String: String]]? {
-    let queryString = """
-      SELECT first_name, last_name, birthdate
-      FROM famous_people
-      order by birthdate desc;
-    """
-    
-    var queryStatement: OpaquePointer? = nil
-    let prepareStatus = sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil)
-    
-    guard prepareStatus == SQLITE_OK else {
-      let errmsg = String(cString: sqlite3_errmsg(database)!)
-      print("prepare error: \(errmsg)")
-      return nil
-    }
-    
-    var stepStatus = sqlite3_step(queryStatement)
-    let numberOfColumns = sqlite3_column_count(queryStatement)
-    
-    var people = [[String: String]]()
-    
-    while (stepStatus == SQLITE_ROW) {
-      var person = [String: String]()
-      
-      for i in 0..<numberOfColumns {
-        let columnName = String(cString: sqlite3_column_name(queryStatement, Int32(i)))
-        let columnText = String(cString: sqlite3_column_text(queryStatement, Int32(i)))
-        person[columnName] = columnText
-      }
-      
-      people.append(person)
-      stepStatus = sqlite3_step(queryStatement)
-    }
-    
-    if stepStatus != SQLITE_DONE {
-      print("Error stepping")
-    }
-    
-    let finalizeStatus = sqlite3_finalize(queryStatement)
-    if finalizeStatus != SQLITE_OK {
-      print("Error finalizing")
-    }
-    
-    return people
-  }
-  
   func getAllPeople(withNameLike name: String) -> [[String: String]]? {
+    var queryString = ""
+    if name == "" {
+      
+      queryString = """
+        SELECT first_name, last_name, birthdate
+        FROM famous_people
+        order by birthdate desc;
+        """
+
+    } else {
     
-    let queryString = """
-      SELECT first_name,
-      last_name
-      , birthdate
-      FROM famous_people
-      WHERE last_name = '
-      """ + name + """
-      'order by birthdate desc;
-      """
+      queryString = """
+        SELECT first_name,
+        last_name
+        , birthdate
+        FROM famous_people
+        WHERE last_name = '
+        """ + name + """
+        'order by birthdate desc;
+        """
+    }
     
     var queryStatement: OpaquePointer? = nil
     let prepareStatus = sqlite3_prepare_v2(database, queryString, -1, &queryStatement, nil)
